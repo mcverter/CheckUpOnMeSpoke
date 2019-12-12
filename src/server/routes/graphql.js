@@ -4,7 +4,7 @@ import { ApolloServer } from "apollo-server-express";
 import { makeExecutableSchema, addMockFunctionsToSchema } from "graphql-tools";
 
 import mocks from "../api/mocks";
-import { createLoaders } from "../models";
+import { contextForRequest } from "../contexts";
 import { config } from "../../config";
 import { resolvers } from "../api/schema";
 import { schema } from "../../api/schema";
@@ -27,8 +27,8 @@ const server = new ApolloServer({
   introspection: !config.isProduction,
   playground: !config.isProduction,
   context: ({ req, res }) => ({
-    loaders: createLoaders(),
-    user: req.user
+    user: req.user,
+    ...contextForRequest(req)
   })
 });
 
