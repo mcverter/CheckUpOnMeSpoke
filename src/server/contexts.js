@@ -42,6 +42,7 @@ export const contextForRequest = req => {
 
   const hostContext = contextByHost[host];
   return {
+    user: req.user,
     loaders: createLoaders(hostContext),
     ...hostContext
   };
