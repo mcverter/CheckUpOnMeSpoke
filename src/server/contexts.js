@@ -1,12 +1,11 @@
-import { r, createLoaders } from "./models";
+import thinky from "./models/thinky";
+import { createLoaders } from "./models";
 
 const createContext = _host => ({
-  // TODO: loaders must be schema-aware
-  loaders: createLoaders(),
   db: {
     schema: "public",
-    master: r.knex,
-    reader: r.reader
+    master: thinky.r.knex,
+    reader: thinky.r.reader
   }
 });
 
@@ -23,5 +22,10 @@ export const contextForRequest = req => {
   if (!contextByHost[host]) {
     contextByHost[host] = createContext(host);
   }
-  return contextByHost[host];
+
+  const hostContext = contextByHost[host];
+  return {
+    loaders: createLoaders(hostContext),
+    ...hostContext
+  };
 };
