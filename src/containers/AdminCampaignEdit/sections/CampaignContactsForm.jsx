@@ -15,11 +15,11 @@ import CheckIcon from "material-ui/svg-icons/action/check-circle";
 import WarningIcon from "material-ui/svg-icons/alert/warning";
 import ErrorIcon from "material-ui/svg-icons/alert/error";
 
-import { parseCSV } from "../lib";
-import { dataTest } from "../lib/attributes";
-import theme from "../styles/theme";
-import GSForm from "../components/forms/GSForm";
-import CampaignFormSectionHeading from "./CampaignFormSectionHeading";
+import { parseCSV } from "../../../lib";
+import { dataTest } from "../../../lib/attributes";
+import theme from "../../../styles/theme";
+import GSForm from "../../../components/forms/GSForm";
+import CampaignFormSectionHeading from "./components/CampaignFormSectionHeading";
 
 const checkIcon = <CheckIcon color={theme.colors.green} />;
 const warningIcon = <WarningIcon color={theme.colors.orange} />;
