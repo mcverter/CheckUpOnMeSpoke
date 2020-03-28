@@ -35,6 +35,7 @@ import SettingsRouter from "./containers/Settings";
 import UserEdit from "./containers/UserEdit";
 import TexterFaqs from "./components/TexterFaqs";
 import FAQs from "./lib/faqs";
+import SignUp from "./components/SignUp";
 
 class ProtectedInner extends React.Component {
   state = { isAuthed: false };
@@ -348,6 +349,7 @@ const AppRoutes = () => (
     <Route path="/" exact={true} component={Home} />
     <Route path="/login" component={Login} />
     <Route path="/terms" component={Terms} />
+    <Route path="/signup" component={SignUp} />
     <Route
       path="/reset/:resetHash"
       render={({ location }) => (

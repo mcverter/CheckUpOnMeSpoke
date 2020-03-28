@@ -100,7 +100,16 @@ class Home extends React.Component {
     return (
       <div>
         <div className={css(styles.header)}>
-          Spoke is a new way to run campaigns using text messaging.
+          CheckUpOn.me lets you register as an at-risk individual, because no one should be alone in these uncertain times.
+        </div>
+        <div>
+          <a
+            id="signup"
+            className={css(styles.link_dark_bg)}
+            href={"/signup"}
+          >
+            Sign Up
+          </a>
         </div>
         <div>
           <a
@@ -109,7 +118,7 @@ class Home extends React.Component {
             href={window.ALTERNATE_LOGIN_URL || "/login"}
             onClick={this.handleOrgInviteClick}
           >
-            Login and get started
+            Volunteer Login
           </a>
         </div>
       </div>
