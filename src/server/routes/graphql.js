@@ -18,7 +18,7 @@ const executableSchema = makeExecutableSchema({
 
 const formatError = err => {
   // node-postgres does not use an Error subclass so we check for schema property
-  if (err.originalError.hasOwnProperty("schema") && config.isProduction) {
+  if (err.originalError && err.originalError.hasOwnProperty("schema") && config.isProduction) {
     logger.error("Postgres error: ", err);
     return new Error("Internal server error");
   }
