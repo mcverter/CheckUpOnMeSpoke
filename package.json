@@ -169,8 +169,6 @@
     "zipcode-to-timezone": "0.0.9"
   },
   "devDependencies": {
-    "@commitlint/cli": "^8.3.5",
-    "@commitlint/config-conventional": "^8.3.4",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^10.0.3",
@@ -184,7 +182,6 @@
     "babel-register": "^6.26.0",
     "babel-runtime": "^6.26.0",
     "commitizen": "^4.0.3",
-    "commitlint-circle": "^1.0.0",
     "conventional-changelog-cli": "^2.0.31",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-15": "^1.0.5",
@@ -223,9 +220,4 @@
       "path": "cz-conventional-changelog"
     }
   },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
-  }
 }
