@@ -31,3 +31,5 @@
 - [ ] My commit messages follow the [Conventional Commits specification](https://www.conventionalcommits.org/en/v1.0.0/).
 - [ ] My change requires a change to the documentation.
 - [ ] I have included updates for the documentation accordingly.
+
+Thanks for contributing!
