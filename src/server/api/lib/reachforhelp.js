@@ -8,14 +8,13 @@ export async function createCampaign(message) {
     if (!message.hasOwnProperty("organizationId") ||
         !message.hasOwnProperty("campaignName")) {
             logger.error("organizationId and campagnName are required");
-            return;
+            throw {message: "organizationId and campagnName are required"};
         }
-    const { organizationId, campaignName } = message;
-    const [campaignId] = await r
+    const campaignId = await r
         .knex("campaign")
         .insert({
-            name: campaignName,
-            organization_id: organizationId
+            name: message.campaignName,
+            organization_id: message.organizationId
         })
         .returning("id");
     return campaignId;
@@ -27,10 +26,12 @@ export async function addContactToCampaign(message) {
         !message.hasOwnProperty("lastName") ||
         !message.hasOwnProperty("cell")) {
             logger.error("campaignId, firstName, lastName, and cell are required");
-            return null;
+            throw {message: "campaignId, firstName, lastName, and cell are required"};
         }
-    const { campaignId, firstName, lastName, cell, zip } = message;
-    const [contactId] = r
+    
+    const { campaignId, firstName, lastName, cell } = message;
+    const zip = message.hasOwnProperty("zip") ? message.zip : "";
+    const contactId = r
         .knex("campaign_contact")
         .insert({
             campaign_id: campaignId,

@@ -23,7 +23,8 @@ import {
   twilioRouter,
   assembleRouter,
   utilsRouter,
-  previewRouter
+  previewRouter,
+  reachForHelpRouter
 } from "./routes";
 import { r } from "./models";
 import { getRunner } from "./worker";
@@ -107,6 +108,7 @@ app.use(twilioRouter);
 app.use(assembleRouter);
 app.use(utilsRouter);
 app.use(previewRouter);
+app.use(reachForHelpRouter);
 
 app.post(
   "/autoassign",
