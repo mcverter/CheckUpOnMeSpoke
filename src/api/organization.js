@@ -24,7 +24,7 @@ export const schema = `
     uuid: String
     name: String
     campaigns(cursor:OffsetLimitCursor, campaignsFilter: CampaignsFilter): PaginatedCampaigns
-    memberships(after: Cursor, first: Int): OrganizationMembershipPage
+    memberships(after: Cursor, first: Int, filter: MembershipFilter): OrganizationMembershipPage
     people(role: String, campaignId: String, offset: Int): [User]
     peopleCount: Int
     optOuts: [OptOut]
@@ -45,6 +45,7 @@ export const schema = `
     linkDomains: [LinkDomain]!
     unhealthyLinkDomains: [UnhealthyLinkDomain]!
     numbersApiKey: String
+    settings: OranizationSettings!
     tagList: [Tag]
     escalationTagList: [Tag]
     teams: [Team]!
