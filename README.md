@@ -12,6 +12,8 @@ that goal. See [`HOWTO_MIGRATE_FROM_MOVEON_MAIN.md`](./docs/HOWTO_MIGRATE_FROM_M
 
 ## Getting started
 
+**NOTE: This Spoke fork was developed and maintained on Debian Linux. OS X and Windows are untested and unsupported.**
+
 1.  Install Postgres.
 
 2.  Install the Node version listed under `engines` in `package.json`. [NVM](https://github.com/creationix/nvm) is one way to do this.
