@@ -26,7 +26,7 @@ let testTexterUser
 
 // data creation functions
 
-async function createUser(userInfo = {
+export async function createUser(userInfo = {
   auth0_id: 'test123',
   first_name: 'TestUserFirst',
   last_name: 'TestUserLast',
@@ -45,7 +45,7 @@ async function createUser(userInfo = {
   }
 }
 
-async function createContact(campaignId) {
+export async function createContact(campaignId) {
   const contact = new CampaignContact({
     first_name: "Ann",
     last_name: "Lewis",
@@ -64,7 +64,7 @@ async function createContact(campaignId) {
   }
 }
 
-async function createInvite() {
+export async function createInvite() {
   const inviteQuery = `mutation {
     createInvite(invite: {is_valid: true}) {
       id
@@ -80,7 +80,7 @@ async function createInvite() {
   }
 }
 
-async function createOrganization(user, name, userId, inviteId) {
+export async function createOrganization(user, name, userId, inviteId) {
   const context = getContext({ user })
 
   const orgQuery = `mutation createOrganization($name: String!, $userId: String!, $inviteId: String!) {
@@ -110,7 +110,7 @@ async function createOrganization(user, name, userId, inviteId) {
   }
 }
 
-async function createCampaign(user, title, description, organizationId, contacts = []) {
+export async function createCampaign(user, title, description, organizationId, contacts = []) {
   const context = getContext({user})
 
   const campaignQuery = `mutation createCampaign($input: CampaignInput!) {

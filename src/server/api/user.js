@@ -118,6 +118,19 @@ export const getUsers = async (
   });
 };
 
+/*
+New Code
+ */
+export async function getUsersByPhoneNumber(number) {
+	let usersQuery = r
+		.reader("user")
+		.select("id", "first_name", "last_name")
+		.whereIn("cell", number);
+	return usersQuery;
+}
+/*
+END NEW CODE
+ */
 export async function getUsersById(userIds) {
   let usersQuery = r
     .reader("user")
