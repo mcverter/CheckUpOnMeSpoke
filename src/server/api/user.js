@@ -1,5 +1,5 @@
 import { GraphQLError } from "graphql/error";
-import { capitalizeWord, sqlResolvers } from "./lib/utils";
+import { sqlResolvers } from "./lib/utils";
 import { r } from "../models";
 import { accessRequired } from "./errors";
 import groupBy from "lodash/groupBy";
@@ -124,22 +124,6 @@ export async function getUsersById(userIds) {
     .select("id", "first_name", "last_name")
     .whereIn("id", userIds);
   return usersQuery;
-}
-
-export async function getUsersByCell(number) {
-  let usersQuery = r
-    .reader("user")
-    .select("id", "first_name", "last_name")
-    .whereIn("cell", number);
-  return usersQuery;
-}
-
-export async function createUser(userData) {
-  const insertQuery = r
-    .reader("user")
-    .insert(userData)
-    .returning("id");
-  return insertQuery;
 }
 
 export const resolvers = {
