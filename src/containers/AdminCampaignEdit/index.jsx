@@ -174,7 +174,7 @@ class AdminCampaignEdit extends React.Component {
   }
 
   isNew() {
-    return queryString.parse(this.props.location.search).new;
+    return Boolean(queryString.parse(this.props.location.search).new);
   }
 
   async handleDeleteJob(jobId) {
@@ -359,6 +359,7 @@ class AdminCampaignEdit extends React.Component {
       {
         title: "Texting Hours",
         content: CampaignTextingHoursForm,
+        isStandalone: true,
         keys: ["textingHoursStart", "textingHoursEnd", "timezone"],
         checkCompleted: () => true,
         blocksStarting: false,
@@ -743,6 +744,7 @@ class AdminCampaignEdit extends React.Component {
             return (
               <Component
                 key={section.title}
+                organizationId={match.params.organizationId}
                 campaignId={campaignId}
                 active={expandedSection === sectionIndex}
                 isNew={isNew}
