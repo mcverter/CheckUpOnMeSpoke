@@ -17,19 +17,19 @@ import DoneIcon from "material-ui/svg-icons/action/done";
 import CancelIcon from "material-ui/svg-icons/navigation/cancel";
 import { red600 } from "material-ui/styles/colors";
 
-import { withAuthzContext } from "../components/AuthzProvider";
-import { loadData } from "./hoc/with-operations";
-import { dataTest, camelCase } from "../lib/attributes";
-import theme from "../styles/theme";
-import CampaignBasicsForm from "../components/CampaignBasicsForm";
-import CampaignContactsForm from "../components/CampaignContactsForm";
-import CampaignTextersForm from "../components/CampaignTextersForm";
-import CampaignOverlapManager from "../components/CampaignOverlapManager";
-import CampaignInteractionStepsForm from "../components/CampaignInteractionStepsForm";
-import CampaignCannedResponsesForm from "../components/CampaignCannedResponsesForm";
-import CampaignTextingHoursForm from "../components/CampaignTextingHoursForm";
-import CampaignAutoassignModeForm from "../components/CampaignAutoassignModeForm";
-import CampaignTeamsForm from "../components/CampaignTeamsForm";
+import { withAuthzContext } from "../../components/AuthzProvider";
+import { loadData } from "../hoc/with-operations";
+import { dataTest, camelCase } from "../../lib/attributes";
+import theme from "../../styles/theme";
+import CampaignBasicsForm from "./sections/CampaignBasicsForm";
+import CampaignContactsForm from "./sections/CampaignContactsForm";
+import CampaignTextersForm from "./sections/CampaignTextersForm";
+import CampaignOverlapManager from "./sections/CampaignOverlapManager";
+import CampaignInteractionStepsForm from "./sections/CampaignInteractionStepsForm";
+import CampaignCannedResponsesForm from "./sections/CampaignCannedResponsesForm";
+import CampaignTextingHoursForm from "./sections/CampaignTextingHoursForm";
+import CampaignAutoassignModeForm from "./sections/CampaignAutoassignModeForm";
+import CampaignTeamsForm from "./sections/CampaignTeamsForm";
 
 const disableTexters = window.DISABLE_CAMPAIGN_EDIT_TEXTERS;
 
@@ -174,7 +174,7 @@ class AdminCampaignEdit extends React.Component {
   }
 
   isNew() {
-    return queryString.parse(this.props.location.search).new;
+    return Boolean(queryString.parse(this.props.location.search).new);
   }
 
   async handleDeleteJob(jobId) {
@@ -339,6 +339,7 @@ class AdminCampaignEdit extends React.Component {
       {
         title: "Basics",
         content: CampaignBasicsForm,
+        isStandalone: true,
         keys: [
           "title",
           "description",
@@ -358,6 +359,7 @@ class AdminCampaignEdit extends React.Component {
       {
         title: "Texting Hours",
         content: CampaignTextingHoursForm,
+        isStandalone: true,
         keys: ["textingHoursStart", "textingHoursEnd", "timezone"],
         checkCompleted: () => true,
         blocksStarting: false,
@@ -497,6 +499,7 @@ class AdminCampaignEdit extends React.Component {
       {
         title: "Autoassign Mode",
         content: CampaignAutoassignModeForm,
+        isStandalone: true,
         keys: ["isAutoassignEnabled"],
         checkCompleted: () => true,
         blocksStarting: true,
@@ -716,10 +719,17 @@ class AdminCampaignEdit extends React.Component {
 
   handleCloseError = () => this.setState({ requestError: undefined });
 
+  handleSectionError = requestError => this.setState({ requestError });
+  handleExpandChange = sectionIndex => isExpended =>
+    this.onExpandChange(sectionIndex, isExpended);
+
   render() {
     const sections = this.sections();
     const { expandedSection, requestError } = this.state;
-    const { adminPerms } = this.props;
+    const { adminPerms, match } = this.props;
+    const campaignId = parseInt(match.params.campaignId);
+    const isNew = this.isNew();
+    const saveLabel = isNew ? "Save and goto next section" : "Save";
 
     const errorActions = [
       <FlatButton label="Ok" primary={true} onClick={this.handleCloseError} />
@@ -729,6 +739,21 @@ class AdminCampaignEdit extends React.Component {
       <div>
         {this.renderHeader()}
         {sections.map((section, sectionIndex) => {
+          if (section.isStandalone) {
+            const { content: Component } = section;
+            return (
+              <Component
+                key={section.title}
+                organizationId={match.params.organizationId}
+                campaignId={campaignId}
+                active={expandedSection === sectionIndex}
+                isNew={isNew}
+                saveLabel={saveLabel}
+                onError={this.handleSectionError}
+                onExpandChange={this.handleExpandChange(sectionIndex)}
+              />
+            );
+          }
           const sectionIsDone =
             this.checkSectionCompleted(section) &&
             this.checkSectionSaved(section);

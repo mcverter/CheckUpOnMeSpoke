@@ -1,10 +1,22 @@
-# Use latest LTS
-FROM node:12.14.0-alpine
+### Dependency Cacher
+### -------------------------
+FROM endeveit/docker-jq:latest as deps
+
+# To prevent cache invalidation from changes in fields other than dependencies
+# https://stackoverflow.com/a/59606373
+COPY package.json /tmp
+RUN jq '{ dependencies, devDependencies, resolutions }' < /tmp/package.json > /tmp/deps.json
+
+
+### Fat Build
+### -------------------------
+FROM node:12.16.1-alpine AS builder
 
 WORKDIR /usr/Spoke
 
 # Cache dependencies
-COPY package.json yarn.lock ./
+COPY --from=deps /tmp/deps.json ./package.json
+COPY yarn.lock ./
 RUN yarn install
 
 # Configure build environment
@@ -20,11 +32,37 @@ ENV NODE_ENV="production" \
 
 # Copy application codebase
 COPY . .
-RUN yarn run prod-build
+RUN yarn run build
+
+
+### Slim Deploy
+### -------------------------
+FROM node:12.16.1-alpine
+
+WORKDIR /usr/Spoke
+
+# Install and cache production dependencies
+COPY --from=deps /tmp/deps.json ./package.json
+COPY yarn.lock ./
+RUN yarn install --production
+
+# Copy only the built source
+COPY --from=builder /usr/Spoke/build ./build
 
 ARG SPOKE_VERSION="no-version"
-ENV SPOKE_VERSION=$SPOKE_VERSION
+ARG PHONE_NUMBER_COUNTRY=US
+ENV NODE_ENV="production" \
+  NODE_OPTIONS=--max_old_space_size=2048 \
+  PORT=3000 \
+  OUTPUT_DIR="./build" \
+  PUBLIC_DIR="./build/client" \
+  ASSETS_DIR="./build/client/assets" \
+  ASSETS_MAP_FILE="assets.json" \
+  PHONE_NUMBER_COUNTRY=$PHONE_NUMBER_COUNTRY \
+  SPOKE_VERSION=$SPOKE_VERSION
+
+COPY package.json ./
 
 # Run the production compiled code
 EXPOSE 3000
-CMD [ "node", "--no-deprecation", "./build/server/server" ]
+CMD [ "node", "--no-deprecation", "./build/src/server" ]

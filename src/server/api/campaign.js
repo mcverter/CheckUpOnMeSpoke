@@ -167,6 +167,18 @@ export const resolvers = {
       });
     }
   },
+  CampaignReadiness: {
+    id: ({ id }) => id,
+    basics: campaign =>
+      campaign.title !== "" &&
+      campaign.description !== "" &&
+      campaign.due_by !== null,
+    textingHours: campaign =>
+      campaign.textingHoursStart !== null &&
+      campaign.textingHoursEnd !== null &&
+      campaign.timezone !== null,
+    autoassign: () => true
+  },
   CampaignsReturn: {
     __resolveType(obj, context, _) {
       if (Array.isArray(obj)) {
@@ -211,6 +223,7 @@ export const resolvers = {
       "timezone",
       "createdAt"
     ]),
+    readiness: campaign => campaign,
     useDynamicAssignment: _ => false,
     isAssignmentLimitedToTeams: campaign => campaign.limit_assignment_to_teams,
     dueBy: campaign =>

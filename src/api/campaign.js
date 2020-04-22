@@ -20,12 +20,20 @@ export const schema = `
     resultMessage: String
   }
 
+  type CampaignReadiness {
+    id: ID!
+    basics: Boolean!
+    textingHours: Boolean!
+    autoassign: Boolean!
+  }
+
   type Campaign {
     id: ID
     organization: Organization
     title: String
     description: String
     dueBy: Date
+    readiness: CampaignReadiness!
     isStarted: Boolean
     isArchived: Boolean
     creator: User

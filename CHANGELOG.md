@@ -2,6 +2,71 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.8.5](https://github.com/politics-rewired/spoke/compare/v1.8.4...v1.8.5) (2020-04-15)
+
+
+### Bug Fixes
+
+* fix permission check ([#631](https://github.com/politics-rewired/spoke/issues/631)) ([b549f9d](https://github.com/politics-rewired/spoke/commit/b549f9d91d18c5b9d35e32c31df72077a567dd8c))
+* remove auth query param from segments helpdesk url ([#637](https://github.com/politics-rewired/spoke/issues/637)) ([29512aa](https://github.com/politics-rewired/spoke/commit/29512aa94146c38321c050e983f82365e25963ed))
+* require owner permissions to query settings ([#632](https://github.com/politics-rewired/spoke/issues/632)) ([03c9890](https://github.com/politics-rewired/spoke/commit/03c9890cc2580fcb0e917c36bf0093947ff62dc6))
+* use the same knex client throughout query builder ([#640](https://github.com/politics-rewired/spoke/issues/640)) ([43aba59](https://github.com/politics-rewired/spoke/commit/43aba59f0b256b42009e7595942055df841d9d1a))
+
+### [1.8.4](https://github.com/politics-rewired/spoke/compare/v1.8.3...v1.8.4) (2020-04-10)
+
+
+### Bug Fixes
+
+* prevent conversation overflow ([7098c25](https://github.com/politics-rewired/spoke/commit/7098c258d200bf6b8004d252980c41449571ccf7))
+
+### [1.8.3](https://github.com/politics-rewired/spoke/compare/v1.8.2...v1.8.3) (2020-04-10)
+
+
+### Bug Fixes
+
+* fix flexbox height calculation in Safari ([#630](https://github.com/politics-rewired/spoke/issues/630)) ([83cf4a2](https://github.com/politics-rewired/spoke/commit/83cf4a2dd8cb53ebee97b2cd88c4295d0bba798b))
+
+### [1.8.2](https://github.com/politics-rewired/spoke/compare/v1.8.1...v1.8.2) (2020-04-08)
+
+
+### Bug Fixes
+
+* **trollbot:** escape trigger tokens ([#627](https://github.com/politics-rewired/spoke/issues/627)) ([1f9ffc1](https://github.com/politics-rewired/spoke/commit/1f9ffc11e9de4fce335a47414498d833e87b6a0e))
+* show all canned response text ([#623](https://github.com/politics-rewired/spoke/issues/623)) ([f347345](https://github.com/politics-rewired/spoke/commit/f3473454cf99f4ac576462702e5a2e6ddbafe66b))
+
+### [1.8.1](https://github.com/politics-rewired/spoke/compare/v1.8.0...v1.8.1) (2020-04-07)
+
+## [1.8.0](https://github.com/politics-rewired/spoke/compare/v1.7.1...v1.8.0) (2020-04-06)
+
+
+### Features
+
+* add organization to topnav ([#622](https://github.com/politics-rewired/spoke/issues/622)) ([e77a041](https://github.com/politics-rewired/spoke/commit/e77a041ffd8596f5b4c77b83b05c02fd5f23da26))
+
+
+### Bug Fixes
+
+* export config as commonjs module to support knex cli ([1edba6b](https://github.com/politics-rewired/spoke/commit/1edba6bcee207f11edf8fbd0369377b0445d43b0))
+* **ux:** make pencil icon size dynamic (take 2) ([#583](https://github.com/politics-rewired/spoke/issues/583)) ([d85d648](https://github.com/politics-rewired/spoke/commit/d85d648ff8583569d1a2c02a2a73fb3982413648))
+
+### [1.7.1](https://github.com/politics-rewired/spoke/compare/v1.7.0...v1.7.1) (2020-03-30)
+
+## [1.7.0](https://github.com/politics-rewired/spoke/compare/v1.6.1...v1.7.0) (2020-03-30)
+
+
+### Features
+
+* add promote-on-assign button ([#611](https://github.com/politics-rewired/spoke/issues/611)) ([9cb2943](https://github.com/politics-rewired/spoke/commit/9cb29432f68bcfdabf88b5d585478af9a1d7b252))
+* default texter approval status ([#614](https://github.com/politics-rewired/spoke/issues/614)) ([b12a35f](https://github.com/politics-rewired/spoke/commit/b12a35f3f8a31f07aedd345decf09aa32ecd23e5))
+* expose texter auto-approval status ([#610](https://github.com/politics-rewired/spoke/issues/610)) ([f0a7e1c](https://github.com/politics-rewired/spoke/commit/f0a7e1c9c76faf3d2e5efaf901c049d00f2c175f))
+
+
+### Bug Fixes
+
+* message review action resolver errors ([#613](https://github.com/politics-rewired/spoke/issues/613)) ([649192d](https://github.com/politics-rewired/spoke/commit/649192dd84ad3de2e1ea41f54d1f89eb10f866d5))
+* throw error only if ineligible for access check ([770336c](https://github.com/politics-rewired/spoke/commit/770336cac41bf69c1cabca80a16a21d26811ab1d))
+* **ux:** avoid flashing background between texts ([#608](https://github.com/politics-rewired/spoke/issues/608)) ([0a605a2](https://github.com/politics-rewired/spoke/commit/0a605a2fcebbdd2b45c807b0c38dae202f38d273))
+
 ### [1.6.1](https://github.com/politics-rewired/spoke/compare/v1.6.0...v1.6.1) (2020-03-23)
 
 
